@@ -39,10 +39,7 @@ defmodule Telemetria.Instrumenter do
 
   @spec events :: [[atom()]]
   def events do
-    json_config()
-    |> Keyword.get(:events, [])
-    |> Kernel.++(poller_events(polling?()))
-    |> Kernel.++(Application.get_env(:telemetria, :events, []))
+    [Telemetria.event() | poller_events(polling?())]
     |> MapSet.new()
     |> Enum.to_list()
   end

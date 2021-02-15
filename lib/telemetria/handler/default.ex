@@ -37,15 +37,15 @@ defmodule Telemetria.Handler.Default do
           :telemetry.event_metadata(),
           :telemetry.handler_config()
         ) :: :ok
-  defp do_handle_event(true, event, measurements, metadata, config) do
-    metadata = build_metadata(event, measurements, metadata, config)
+  defp do_handle_event(true, _event, measurements, metadata, config) do
+    metadata = build_metadata(metadata[:event], measurements, metadata, config)
     Logger.metadata(metadata[:metadata])
     do_log(metadata[:severity], metadata[:message], metadata[:env])
     Logger.reset_metadata(metadata[:default_metadata])
   end
 
-  defp do_handle_event(false, event, measurements, metadata, config) do
-    metadata = build_metadata(event, measurements, metadata, config)
+  defp do_handle_event(false, _event, measurements, metadata, config) do
+    metadata = build_metadata(metadata[:event], measurements, metadata, config)
     do_log(metadata[:severity], inspect(metadata[:metadata]), metadata[:env])
   end
 

@@ -146,6 +146,10 @@ defmodule Telemetria do
 
   defmacro t(ast, opts), do: do_t(ast, opts, __CALLER__)
 
+  def event() do
+    [:telemetria]
+  end
+
   @compile {:inline, enabled?: 0, enabled?: 1}
   @spec enabled?(opts :: keyword()) :: boolean()
   defp enabled?(opts \\ []),
@@ -261,7 +265,7 @@ defmodule Telemetria do
           benchmark = System.monotonic_time(:microsecond) - now[:monotonic]
 
           :telemetry.execute(
-            unquote(event),
+            event(),
             %{
               reference: reference,
               system_time: now,
@@ -271,7 +275,8 @@ defmodule Telemetria do
               env: unquote(caller),
               result: result,
               args: unquote(args),
-              context: unquote(context)
+              context: unquote(context),
+              event: unquote(event)
             }
           )
 
