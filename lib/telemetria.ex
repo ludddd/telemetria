@@ -276,7 +276,7 @@ defmodule Telemetria do
               result: result,
               args: unquote(args),
               context: unquote(context),
-              event: unquote(event)
+              event: unquote(event) |> Enum.join(".")
             }
           )
 

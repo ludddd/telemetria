@@ -16,8 +16,8 @@ defmodule Telemetria.Test do
         Process.sleep(100)
       end)
 
-    assert log =~ "[:test, :telemetria, :example, :twice]"
-    assert log =~ "[:test, :telemetria, :example, :sum_with_doubled]"
+    assert log =~ "test.telemetria.example.twice"
+    assert log =~ "test.telemetria.example.sum_with_doubled"
     assert log =~ "result: 7"
   end
 
@@ -28,7 +28,7 @@ defmodule Telemetria.Test do
         Process.sleep(100)
       end)
 
-    assert log =~ "[:test, :telemetria, :example, :half]"
+    assert log =~ "test.telemetria.example.half"
     assert log =~ "args: [a: 42]"
     assert log =~ "result: 21"
   end
@@ -40,7 +40,7 @@ defmodule Telemetria.Test do
         Process.sleep(100)
       end)
 
-    assert log =~ "[:test, :telemetria, :example, :half_named, :foo]"
+    assert log =~ "test.telemetria.example.half_named.foo"
     assert log =~ "result: #Function<"
   end
 
@@ -51,7 +51,7 @@ defmodule Telemetria.Test do
         Process.sleep(100)
       end)
 
-    assert log =~ "[:test, :telemetria, :example, :tmed]"
+    assert log =~ "test.telemetria.example.tmed"
     assert log =~ "result: 42"
   end
 
@@ -62,7 +62,7 @@ defmodule Telemetria.Test do
         Process.sleep(100)
       end)
 
-    assert log =~ "[:test, :telemetria, :example, :tmed_do]"
+    assert log =~ "test.telemetria.example.tmed_do"
     assert log =~ "result: 42"
   end
 
@@ -74,7 +74,7 @@ defmodule Telemetria.Test do
         Process.sleep(100)
       end)
 
-    assert log =~ "[:test, :telemetria, :example, :guarded]"
+    assert log =~ "test.telemetria.example.guarded"
     assert log =~ "result: 84"
     assert log =~ "result: :ok"
   end
@@ -86,8 +86,8 @@ defmodule Telemetria.Test do
         Process.sleep(100)
       end)
 
-    assert log =~ "[:test, :telemetria, :example, :annotated_1]"
-    assert log =~ "[:test, :telemetria, :example, :annotated_2]"
+    assert log =~ "test.telemetria.example.annotated_1"
+    assert log =~ "test.telemetria.example.annotated_2"
     assert log =~ "result: 42"
   end
 
@@ -98,8 +98,8 @@ defmodule Telemetria.Test do
         Process.sleep(100)
       end)
 
-    assert log =~ "event: [:test, :telemetria, :example, :annotated_1]"
-    assert log =~ "event: [:test, :telemetria, :example, :annotated_2]"
+    assert log =~ "name: \"test.telemetria.example.annotated_1\""
+    assert log =~ "name: \"test.telemetria.example.annotated_2\""
     assert log =~ "result: 42"
   end
 
@@ -112,6 +112,6 @@ defmodule Telemetria.Test do
         Process.sleep(100)
       end)
 
-    assert log =~ "event: [:test, :telemetria, :example, :check_s]"
+    assert log =~ "name: \"test.telemetria.example.check_s\""
   end
 end
